@@ -1,7 +1,7 @@
 {
   "name": "MOEBOT-MD",
   "description": "A powerful WhatsApp bot built with Baileys",
-  "repository": "https://github.com/username/MOEBOT-MD",
+  "repository": "https://github.com/Kennwalker/MOEBOT-MD.git",
   "logo": "https://pixeldrain.com/u/qMhWCoDu",
   "keywords": ["whatsapp", "bot", "baileys", "MOEBOT-MD"],
   "env": {
