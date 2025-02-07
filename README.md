@@ -27,7 +27,7 @@ MOEBOT-MD is a powerful WhatsApp bot built using the **Baileys** library. It inc
 Click the button below to fork the MOEBOT-MD repository to your GitHub account:
 
 <div align="center">
-  <a href="https://github.com/your-username/MOEBOT-MD/fork">
+  <a href="https://github.com/Kennwalker/MOEBOT-MD/fork">
     <img src="https://img.shields.io/badge/Fork-Repository-blue?style=for-the-badge" alt="Fork the repository"/>
   </a>
 </div>
