@@ -1,0 +1,37 @@
+{
+  "name": "MOEBOT-MD",
+  "description": "A powerful WhatsApp bot built with Baileys",
+  "repository": "https://github.com/username/MOEBOT-MD",
+  "logo": "https://pixeldrain.com/u/qMhWCoDu",
+  "keywords": ["whatsapp", "bot", "baileys", "MOEBOT-MD"],
+  "env": {
+    "OWNER_NUMBER": {
+      "description": "Your WhatsApp number (including country code)",
+      "value": "+12136061765"
+    },
+    "BOT_NAME": {
+      "description": "Your bot's name",
+      "value": "MOEBOT-MD"
+    },
+    "PAIRING_URL": {
+      "description": "URL to pair and get creds.js",
+      "value": "https://silva-creds.onrender.com/pair"
+    },
+    "SESSION_FILE": {
+      "description": "Path to creds.js file",
+      "value": "./auth_info_baileys/creds.js"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "addons": []
+}
