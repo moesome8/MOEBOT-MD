@@ -34,7 +34,7 @@ You can easily deploy MOEBOT-MD on various platforms:
 
 ### 1️⃣ Fork the Repository  
 Click below to fork MOEBOT-MD to your GitHub account:  
-**[FORK REPOSITORY](#)**
+**[https://github.com/Kennwalker/MOEBOT-MD.git](#)**
 
 ### 2️⃣ Get Pair Code  
 Click below to get your `creds.js` file by pairing with your WhatsApp account:  
