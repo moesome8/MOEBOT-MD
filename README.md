@@ -8,13 +8,13 @@ MOEBOT-MD is a powerful WhatsApp bot built using the **Baileys** library. It inc
 
 <div align="center"> 
   <a href="https://git.io/typing-svg"> 
-    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=MOEBOT-MD;Multi+Device+Whatsapp+Bot;Coded+By+Tyllex+Max" alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Ribeye&size=50&pause=1000&color=33ff00&center=true&width=910&height=100&lines=MOEBOT-MD;Multi+Device+Whatsapp+Bot;Coded+By+MOE+12136061765" alt="Typing SVG" />
   </a> 
 </div> 
 
 <div align="center"> 
   <a href="https://wa.me/message/HEYNTN2KD6K7O1"> 
-    <img src="https://pixeldrain.com/u/qMhWCoDu" alt="MOEBOT-MD" height="300"> 
+    <img src="https://i.postimg.cc/pXy7XPjP/79-A0-F3-AE-FFAE-4445-8-FEF-95-DB12-C0-FEC3.png" alt="MOEBOT-MD" height="300"> 
   </a> 
 </div>
 
