@@ -5,9 +5,9 @@ module.exports = async (sock, chatId) => {
 ┃★│ Baileys : *Multi Device*
 ┃★│ Type : *NodeJs*
 ┃★│ Platform : *Heroku*
-┃★│ Mode : *[public]*
+┃★│ Mode : *[private]*
 ┃★│ Prefix : *[.]*  
-┃★│ Version : *V.1 Bᴇᴛᴀ*
+┃★│ Version : *V.5 Bᴇᴛᴀ*
 ┃★╰──────────────
 ╰━━━━━━━━━━━━━━━┈⊷
 ╭━━〔 *Download Menu* 〕━━┈⊷
@@ -41,6 +41,12 @@ module.exports = async (sock, chatId) => {
 ┃◈┃• truth
 ┃◈┃• dare
 ┃◈└───────────┈⊷
+╰──────────────┈⊷
+╭━━〔 *Vision* 〕━━┈⊷
+┃◈ Our Vision:
+┃◈ To empower our users with innovative WhatsApp automation.
+┃◈ Delivering reliability and creativity,
+┃◈ we aim to set the benchmark in messaging bots.
 ╰──────────────┈⊷
 > *©️ ᴘᴏᴡᴇʀᴇᴅ ʙʏ MOEMD-BOT☠️*`;
 
