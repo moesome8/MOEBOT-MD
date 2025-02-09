@@ -53,8 +53,8 @@ Deploy the bot and easily connect it to your WhatsApp account by using the pair 
 For further customization and setup guidance, click the button below:
 
 <div align="center">
-  <a href="https://youtu.be/dDyiEHF8rIQ">
-    <img src="https://img.shields.io/badge/Deploy Tutorial-dc3545?style=for-the-badge&logo=youtube" alt="YouTube Link"/>
+  <a href="https://wa.me/message/HEYNTN2KD6K7O1">
+    <img src="https://img.shields.io/badge/Contact whatsapp-dc3545?style=for-the-badge&logo=whatsapp" alt="Whatsapp Link"/>
   </a>
   <a href="https://bot-hosting.net/">
     <img src="https://img.shields.io/badge/Deploy on Panel-28a745?style=for-the-badge" alt="Deploy on Panel"/>
