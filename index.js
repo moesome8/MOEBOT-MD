@@ -1,102 +1,98 @@
 const {
-    default: makeWASocket,
-    useMultiFileAuthState,
-    fetchLatestBaileysVersion,
-    DisconnectReason,
+  default: makeWASocket,
+  useMultiFileAuthState,
+  fetchLatestBaileysVersion,
 } = require("@whiskeysockets/baileys");
-const fs = require("fs");
-const path = require("path");
+
 const qrcode = require("qrcode-terminal");
-require("dotenv").config();
+const dotenv = require("dotenv");
+dotenv.config();
 
-async function startBot() {
-    const { state, saveCreds } =
-        await useMultiFileAuthState("auth_info_baileys");
-    const { version } = await fetchLatestBaileysVersion();
+const startBot = async () => {
+  const { state, saveCreds } = await useMultiFileAuthState("./auth_info");
+  const { version } = await fetchLatestBaileysVersion();
 
-    const sock = makeWASocket({
-        version,
-        auth: state,
-        printQRInTerminal: false,
-        syncFullHistory: true,
+  const sock = makeWASocket({
+    version,
+    auth: state,
+    printQRInTerminal: false, // QR itaonyeshwa kwa qrcode-terminal
+  });
+
+  // QR Code Display
+  sock.ev.on("connection.update", (update) => {
+    const { connection, lastDisconnect, qr } = update;
+
+    if (qr) {
+      console.log("🔹 Scan QR Code hii kwenye WhatsApp yako:");
+      qrcode.generate(qr, { small: true });
+    }
+
+    if (connection === "close") {
+      console.log("🔴 Connection closed. Restarting bot...");
+      startBot();
+    } else if (connection === "open") {
+      console.log("✅ MOEBOT-MD imeunganishwa na WhatsApp!");
+    }
+  });
+
+  sock.ev.on("creds.update", saveCreds);
+
+  // Kusikiliza Messages
+  sock.ev.on("messages.upsert", async (m) => {
+    const msg = m.messages[0];
+    const messageText = msg.message?.conversation || "";
+    const remoteJid = msg.key.remoteJid;
+
+    console.log(`📩 Ujumbe mpya: ${messageText}`);
+
+    if (messageText === ".ping") {
+      await sock.sendMessage(remoteJid, { text: "🏓 Pong!" });
+    }
+
+    if (messageText === ".status") {
+      await sock.sendMessage(remoteJid, { text: "✅ MOEBOT-MD iko hewani!" });
+    }
+
+    if (messageText === ".help" || messageText === ".menu") {
+      await sock.sendMessage(remoteJid, {
+        text: "🛠 *MOEBOT-MD Commands:*\n\n.ping - Test response\n.status - Check bot status\n.help - List commands",
+      });
+    }
+
+    // Auto Read Messages
+    if (process.env.AUTO_READ_MESSAGES === "yes") {
+      await sock.readMessages([msg.key]);
+    }
+
+    // Auto View Once
+    if (msg.message?.viewOnceMessage) {
+      await sock.sendMessage(remoteJid, {
+        text: "👀 Nimeona ujumbe wako wa view-once!",
+      });
+    }
+
+    // Anti-Delete Messages
+    sock.ev.on("messages.update", (updates) => {
+      updates.forEach((update) => {
+        console.log(`❌ Ujumbe umefutwa kutoka ${remoteJid}`);
+      });
     });
+  });
 
-    sock.ev.on("creds.update", saveCreds);
+  // Kusikiliza Status Updates
+  sock.ev.on("status-update", async (status) => {
+    console.log(`📝 Status mpya kutoka ${status.participant}`);
 
-    sock.ev.on("connection.update", (update) => {
-        const { connection, lastDisconnect, qr } = update;
-        if (connection === "open") {
-            console.log("✅ Bot imeunganishwa kwenye WhatsApp!");
-        } else if (connection === "close") {
-            console.log("❌ Muunganisho umefungwa:", lastDisconnect.error);
-            if (
-                lastDisconnect.error?.output?.statusCode !==
-                DisconnectReason.loggedOut
-            ) {
-                console.log("🔄 Reconnecting...");
-                startBot();
-            }
-        }
-        if (qr) {
-            console.log(
-                "QR Code imeonekana, lakini imezimwa kuonyesha kutokana na credentials sahihi.",
-            );
-        }
-    });
+    if (process.env.AUTO_READ_STATUS === "yes") {
+      await sock.readMessages([status.id]);
+    }
 
-    sock.ev.on("messages.upsert", async ({ messages }) => {
-        const msg = messages[0];
-        if (!msg.message || msg.key.remoteJid.endsWith("@g.us")) return;
+    if (process.env.AUTO_LIKE_STATUS === "yes") {
+      await sock.sendMessage(status.participant, {
+        react: { text: "❤️", key: status.key },
+      });
+    }
+  });
+};
 
-        const from = msg.key.remoteJid;
-        const text =
-            msg.message.conversation ||
-            msg.message.extendedTextMessage?.text ||
-            "";
-
-        console.log(`📩 Ujumbe mpya kutoka ${from}: ${text}`);
-
-        if (text.toLowerCase() === "hello") {
-            await sock.sendMessage(from, { text: "Hello! I am MOE☠️ Bot 🤖." });
-        } else if (text.toLowerCase() === "sticker") {
-            const quoted =
-                msg.message.extendedTextMessage?.contextInfo?.quotedMessage;
-            if (quoted && quoted.imageMessage) {
-                try {
-                    const buffer = await sock.downloadMediaMessage({
-                        message: quoted,
-                    });
-                    await sock.sendMessage(from, { sticker: buffer });
-                } catch (error) {
-                    console.error("Error converting image to sticker:", error);
-                }
-            }
-        } else if (text.toLowerCase() === "download") {
-            const quoted =
-                msg.message.extendedTextMessage?.contextInfo?.quotedMessage;
-            if (
-                quoted &&
-                (quoted.imageMessage ||
-                    quoted.videoMessage ||
-                    quoted.audioMessage)
-            ) {
-                try {
-                    const media = await sock.downloadMediaMessage({
-                        message: quoted,
-                    });
-                    const fileName = `downloads/${Date.now()}.jpg`;
-                    fs.writeFileSync(fileName, media);
-                    await sock.sendMessage(from, {
-                        text: `✅ Media downloaded: ${fileName}`,
-                    });
-                } catch (error) {
-                    console.error("Error downloading media:", error);
-                }
-            }
-        }
-    });
-
-    console.log("✅ MOE☠️ Bot is running in private mode!");
-}
-
-startBot().catch((err) => console.error("Error starting bot:", err));
+startBot();
