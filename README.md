@@ -40,7 +40,7 @@ Deploy the bot and easily connect it to your WhatsApp account by using the pair 
 
 <div align="center">
   <a href="https://silva-creds.onrender.com/pair">
-    <img src="https://img.shields.io/badge/GET%20PAIR%20CODE-Silva%20Creds-success?style=for-the-badge" alt="Get Pair Code"/>
+    <img src="https://img.shields.io/badge/GET%20PAIR%20CODE-Moe%20Creds-success?style=for-the-badge" alt="Get Pair Code"/>
   </a>
 </div>
 
