@@ -1,16 +1,22 @@
 {
-  "name": "moe-md-bot",
+  "name": "MOEBOT-MD",
   "version": "1.0.0",
-  "description": "MOE☠️ WhatsApp Bot",
+  "description": "WhatsApp bot built by MoE☠️",
   "main": "index.js",
+  "type": "commonjs",
   "scripts": {
     "start": "node index.js"
   },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "baileys"
+  ],
+  "author": "MoE ☠️",
+  "license": "ISC",
   "dependencies": {
-    "@whiskeysockets/baileys": "^6.7.12",
-    "dotenv": "^16.3.1",
-    "fs": "^0.0.2",
-    "path": "^0.12.7",
-    "qrcode-terminal": "^0.12.0"
+    "@whiskeysockets/baileys": "^6.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "dotenv": "^16.3.1"
   }
 }
